@@ -1,2 +1,5 @@
 # Prive-Lounge2
-Front with Reach and Backend with Node.JS
+
+Este es un proyecto para el profesor Ariel Ramos Ortega
+Curso: Lenguajes de Base de Datos Campus Virtual
+2022 Segundo Cuatrimestre
