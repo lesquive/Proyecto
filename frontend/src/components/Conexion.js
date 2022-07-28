@@ -9,6 +9,7 @@ import imagenBar from "../imagenes/bar-landing.jpg";
 import DoneIcon from "@mui/icons-material/Done";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useDB } from "./../contexts/DBContext";
+import { Link } from "react-router-dom";
 
 export default function Conexion() {
   const { DBConnection } = useDB();
@@ -43,7 +44,9 @@ export default function Conexion() {
         )}
       </CardContent>
       <CardActions>
-        <Button size="small">Más información</Button>
+        <Link to="equipo">
+          <Button size="small">Más información</Button>
+        </Link>
       </CardActions>
     </Card>
   );
