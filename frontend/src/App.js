@@ -6,6 +6,7 @@ import { DBProvider } from "./contexts/DBContext";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Equipo from "./components/Equipo";
+import Employees from "./components/Employees";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Body />} />
             <Route path="equipo" element={<Equipo />} />
+            <Route path="empleados" element={<Employees />} />
           </Routes>
           <Footer />
         </DBProvider>

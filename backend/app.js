@@ -28,10 +28,10 @@ async function connectDB() {
 }
 
 //funcion para verificar cual es el usuario actual en la DB:
-async function getDBUser() {
+async function getDBUsers() {
   try {
     const user = await connection.execute(`SELECT * From USUARIOS`, []);
-    console.log(user);
+    console.log("users in this function: " + user);
     return user.rows;
   } catch (error) {
     console.error(error);
@@ -47,8 +47,8 @@ app.get("/", (req, res) => {
 });
 
 //funcion para hacer la conexion a Oracle /
-app.get("/connectDB", async (req, res) => {
-  const user = await getDBUser();
+app.get("/listEmployees", async (req, res) => {
+  const user = await getDBUsers();
   res.json({
     result: user,
   });

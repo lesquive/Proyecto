@@ -8,6 +8,7 @@ export function useDB() {
 
 export function DBProvider({ children }) {
   const [DBConnection, setDBConnection] = useState(false);
+  const [dbEmployees, setDbEmployees] = useState([]);
 
   async function getDBConnection() {
     fetch("http://localhost:5000/").then((res) => {
@@ -19,9 +20,10 @@ export function DBProvider({ children }) {
   }
 
   async function getUsuarios() {
-    fetch("http://localhost:5000/connectDB").then((res) => {
+    fetch("http://localhost:5000/listEmployees").then((res) => {
       res.json().then((data) => {
-        console.log(data);
+        console.log(data.result);
+        setDbEmployees(data.result);
       });
     });
   }
@@ -34,7 +36,7 @@ export function DBProvider({ children }) {
     };
   }, []);
 
-  const value = { DBConnection, getDBConnection };
+  const value = { DBConnection, dbEmployees, getDBConnection, getUsuarios };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;
 }

@@ -8,6 +8,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import fideLogo from "./../imagenes/logo-fidelitas.png";
+import developer1 from "./../imagenes/developer1.png";
+import developer2 from "./../imagenes/developer2.png";
+import developer3 from "./../imagenes/developer3.png";
+import developer4 from "./../imagenes/developer4.png";
 
 export default function Equipo() {
   return (
@@ -41,7 +45,7 @@ export default function Equipo() {
               </Typography>
               <Avatar
                 alt="Luis Esquivel"
-                src="/static/images/avatar/1.jpg"
+                src={developer2}
                 sx={{ width: 56, height: 56, m: "auto" }}
               />
 
@@ -67,7 +71,7 @@ export default function Equipo() {
               </Typography>
               <Avatar
                 alt="Paula Luna"
-                src="/static/images/avatar/1.jpg"
+                src={developer4}
                 sx={{ width: 56, height: 56, m: "auto" }}
               />
 
@@ -93,7 +97,7 @@ export default function Equipo() {
               </Typography>
               <Avatar
                 alt="Camilo Duarte"
-                src="/static/images/avatar/1.jpg"
+                src={developer1}
                 sx={{ width: 56, height: 56, m: "auto" }}
               />
 
@@ -119,7 +123,7 @@ export default function Equipo() {
               </Typography>
               <Avatar
                 alt="Johan Solis"
-                src="/static/images/avatar/1.jpg"
+                src={developer3}
                 sx={{ width: 56, height: 56, m: "auto" }}
               />
 
