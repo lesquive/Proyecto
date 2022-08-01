@@ -60,6 +60,27 @@ async function getDBTotalEmployees() {
   }
 }
 
+//funcion para verificar cual es el usuario actual en la DB:
+async function getDBLastEmployee() {
+  try {
+    let plSQL = `
+                  DECLARE
+                  result VARCHAR2(100);
+                  BEGIN 
+                    :result := LASTEMPLOYEE(); 
+                  END; 
+                `;
+    const totalEmpleados = await connection.execute(plSQL, {
+      result: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
+    });
+    console.log("Last Employee in DB: " + totalEmpleados.outBinds.result);
+    return totalEmpleados.outBinds.result;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 //ruta principal
 app.get("/", (req, res) => {
   res.json({
@@ -81,6 +102,15 @@ app.get("/totalEmployees", async (req, res) => {
   console.log("total: " + total);
   res.json({
     result: total,
+  });
+});
+
+//ruta para obtener ultimo empleado
+app.get("/lastEmployee", async (req, res) => {
+  const ultimo = await getDBLastEmployee(); //se llama la funcion getDBTotalEmployees
+  console.log("ultimo empleado: " + ultimo);
+  res.json({
+    result: ultimo,
   });
 });
 

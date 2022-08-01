@@ -16,10 +16,19 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
 export default function Employees() {
-  const { getUsuarios, dbEmployees } = useDB();
+  const {
+    getEmployees,
+    dbEmployees,
+    allEmployeesCount,
+    getAllEmployeesCount,
+    lastEmployee,
+    getLastEmployee,
+  } = useDB();
 
   async function loadEmployees() {
-    getUsuarios();
+    getEmployees();
+    getAllEmployeesCount();
+    getLastEmployee();
   }
 
   useEffect(() => {
@@ -51,8 +60,26 @@ export default function Employees() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid xs={4}>Total de Empleados:</Grid>
-        <Grid xs={4}>Empleado mas Nuevo:</Grid>
+        <Grid xs={4}>
+          <Typography
+            variant="body1"
+            component="div"
+            gutterBottom
+            sx={{ color: "green" }}
+          >
+            Total de Empleados: {allEmployeesCount}
+          </Typography>
+        </Grid>
+        <Grid xs={4}>
+          <Typography
+            variant="body1"
+            component="div"
+            gutterBottom
+            sx={{ color: "blue" }}
+          >
+            Empleado mas Nuevo: {lastEmployee}
+          </Typography>
+        </Grid>
         <Grid xs={4}>
           <Button variant="contained" color="success">
             Agregar Empleado
