@@ -16,6 +16,12 @@ export default function MenuDropDown() {
     handleClose();
   };
 
+  const RuteClientes = () => {
+    let path = `/clientes`;
+    navigate(path);
+    handleClose();
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,7 +55,7 @@ export default function MenuDropDown() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Clientes</MenuItem>
+        <MenuItem onClick={RuteClientes}>Clientes</MenuItem>
         <MenuItem onClick={RutaEmpleados}>Employees</MenuItem>
         <MenuItem onClick={handleClose}>Inventory</MenuItem>
         <MenuItem onClick={handleClose}>Invoices</MenuItem>

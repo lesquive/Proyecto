@@ -28,11 +28,11 @@ async function connectDB() {
 }
 
 //funcion para verificar cual es el usuario actual en la DB:
-async function getDBEmployees() {
+async function getDBUsuarios() {
   try {
-    const user = await connection.execute(`SELECT * From USUARIOS`, []);
-    console.log("users in this function: " + user);
-    return user.rows;
+    const usuarios = await connection.execute(`SELECT * From USUARIOS`, []);
+    console.log("Usuarios en esta funcion: " + usuarios);
+    return usuarios.rows;
   } catch (error) {
     console.error(error);
     return error;
@@ -40,20 +40,20 @@ async function getDBEmployees() {
 }
 
 //funcion para verificar cual es el usuario actual en la DB:
-async function getDBTotalEmployees() {
+async function getDBTotalUsuarios() {
   try {
     let plSQL = `
                   DECLARE
                   result NUMBER;
                   BEGIN 
-                    :result := TOTALEMPLOYEES(); 
+                    :result := TOTALUSUARIOS(); 
                   END; 
                 `;
-    const totalEmpleados = await connection.execute(plSQL, {
+    const totalUsuarios = await connection.execute(plSQL, {
       result: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER },
     });
-    console.log("Total users in employees: " + totalEmpleados.outBinds.result);
-    return totalEmpleados.outBinds.result;
+    console.log("Total de usuarios en DB: " + totalUsuarios.outBinds.result);
+    return totalUsuarios.outBinds.result;
   } catch (error) {
     console.error(error);
     return error;
@@ -61,20 +61,20 @@ async function getDBTotalEmployees() {
 }
 
 //funcion para verificar cual es el usuario actual en la DB:
-async function getDBLastEmployee() {
+async function getDBLastUsuario() {
   try {
     let plSQL = `
                   DECLARE
                   result VARCHAR2(100);
                   BEGIN 
-                    :result := LASTEMPLOYEE(); 
+                    :result := ULTIMOUSUARIO(); 
                   END; 
                 `;
-    const totalEmpleados = await connection.execute(plSQL, {
+    const ultimoEmpleado = await connection.execute(plSQL, {
       result: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
     });
-    console.log("Last Employee in DB: " + totalEmpleados.outBinds.result);
-    return totalEmpleados.outBinds.result;
+    console.log("Ultimo usuario en DB: " + ultimoEmpleado.outBinds.result);
+    return ultimoEmpleado.outBinds.result;
   } catch (error) {
     console.error(error);
     return error;
@@ -88,27 +88,27 @@ app.get("/", (req, res) => {
   });
 });
 
-//ruta para obtener lista de empleados
-app.get("/listEmployees", async (req, res) => {
-  const employees = await getDBEmployees(); //se llama la funcion getDBEmployees
+//ruta para obtener lista de usuarios
+app.get("/listarUsuarios", async (req, res) => {
+  const usuarios = await getDBUsuarios(); //se llama la funcion getDBUsuarios
   res.json({
-    result: employees,
+    result: usuarios,
   });
 });
 
-//ruta para obtener lista de total de empleados
-app.get("/totalEmployees", async (req, res) => {
-  const total = await getDBTotalEmployees(); //se llama la funcion getDBTotalEmployees
+//ruta para obtener lista de total de usuarios
+app.get("/totalUsuarios", async (req, res) => {
+  const total = await getDBTotalUsuarios(); //se llama la funcion getDBTotalUsuarios
   console.log("total: " + total);
   res.json({
     result: total,
   });
 });
 
-//ruta para obtener ultimo empleado
-app.get("/lastEmployee", async (req, res) => {
-  const ultimo = await getDBLastEmployee(); //se llama la funcion getDBTotalEmployees
-  console.log("ultimo empleado: " + ultimo);
+//ruta para obtener ultimo usuario
+app.get("/ultimoUsuario", async (req, res) => {
+  const ultimo = await getDBLastUsuario(); //se llama la funcion getDBLastUsuario
+  console.log("ultimo usuario: " + ultimo);
   res.json({
     result: ultimo,
   });
@@ -118,4 +118,6 @@ app.get("/lastEmployee", async (req, res) => {
 connectDB();
 
 //Levantar servidor express:
-app.listen(port, () => console.log(`Server is up and running on port ${port}`));
+app.listen(port, () =>
+  console.log(`El Servidor express esta corriendo en el puerto: ${port}`)
+);

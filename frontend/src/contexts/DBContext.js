@@ -8,9 +8,9 @@ export function useDB() {
 
 export function DBProvider({ children }) {
   const [DBConnection, setDBConnection] = useState(false);
-  const [dbEmployees, setDbEmployees] = useState([]);
-  const [allEmployeesCount, setAllEmployeesCount] = useState(0);
-  const [lastEmployee, setLastEmployee] = useState("");
+  const [dbUsuarios, setDbUsuarios] = useState([]);
+  const [todosUsuarios, setTodosUsuarios] = useState(0);
+  const [ultimoUsuario, setUltimoUsuario] = useState("");
 
   async function getDBConnection() {
     fetch("http://localhost:5000/").then((res) => {
@@ -21,29 +21,29 @@ export function DBProvider({ children }) {
     });
   }
 
-  async function getEmployees() {
-    fetch("http://localhost:5000/listEmployees").then((res) => {
+  async function getUsuarios() {
+    fetch("http://localhost:5000/listarUsuarios").then((res) => {
       res.json().then((data) => {
         console.log(data.result);
-        setDbEmployees(data.result);
+        setDbUsuarios(data.result);
       });
     });
   }
 
-  async function getAllEmployeesCount() {
-    fetch("http://localhost:5000/totalEmployees").then((res) => {
+  async function getTodosUsuarios() {
+    fetch("http://localhost:5000/totalUsuarios").then((res) => {
       res.json().then((data) => {
         console.log(data.result);
-        setAllEmployeesCount(data.result);
+        setTodosUsuarios(data.result);
       });
     });
   }
 
-  async function getLastEmployee() {
-    fetch("http://localhost:5000/lastEmployee").then((res) => {
+  async function getUltimoUsuario() {
+    fetch("http://localhost:5000/ultimoUsuario").then((res) => {
       res.json().then((data) => {
         console.log(data.result);
-        setLastEmployee(data.result);
+        setUltimoUsuario(data.result);
       });
     });
   }
@@ -58,13 +58,13 @@ export function DBProvider({ children }) {
 
   const value = {
     DBConnection,
-    dbEmployees,
-    allEmployeesCount,
-    lastEmployee,
+    dbUsuarios,
+    todosUsuarios,
+    ultimoUsuario,
     getDBConnection,
-    getEmployees,
-    getAllEmployeesCount,
-    getLastEmployee,
+    getUsuarios,
+    getTodosUsuarios,
+    getUltimoUsuario,
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;

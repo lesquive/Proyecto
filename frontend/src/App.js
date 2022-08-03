@@ -7,6 +7,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Equipo from "./components/Equipo";
 import Employees from "./components/Employees";
+import Clientes from "./components/Clientes";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Body />} />
             <Route path="equipo" element={<Equipo />} />
             <Route path="empleados" element={<Employees />} />
+            <Route path="clientes" element={<Clientes />} />
           </Routes>
           <Footer />
         </DBProvider>

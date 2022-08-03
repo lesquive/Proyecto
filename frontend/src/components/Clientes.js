@@ -1,5 +1,5 @@
 import React from "react";
-import { useDB } from "./../contexts/DBContext";
+import { useDB } from "../contexts/DBContext";
 import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-export default function Employees() {
+export default function Clientes() {
   const {
     getUsuarios,
     dbUsuarios,
@@ -55,7 +55,7 @@ export default function Employees() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        Empleados:
+        Clientes:
       </Typography>
       <Grid
         container
@@ -71,7 +71,7 @@ export default function Employees() {
             gutterBottom
             sx={{ color: "green" }}
           >
-            Total de Empleados: {todosUsuarios}
+            Total de Clientes: {todosUsuarios}
           </Typography>
         </Grid>
         <Grid xs={4}>
@@ -81,12 +81,12 @@ export default function Employees() {
             gutterBottom
             sx={{ color: "blue" }}
           >
-            Empleado mas Nuevo: {ultimoUsuario}
+            Cliente mas Nuevo: {ultimoUsuario}
           </Typography>
         </Grid>
         <Grid xs={4}>
           <Button variant="contained" color="success" onClick={addUser}>
-            Agregar Empleado
+            Agregar Cliente
           </Button>
         </Grid>
       </Grid>
