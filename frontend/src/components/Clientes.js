@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
 
 export default function Clientes() {
   const {
@@ -24,6 +25,7 @@ export default function Clientes() {
     ultimoUsuario,
     getUltimoUsuario,
   } = useDB();
+  let navigate = useNavigate();
 
   async function loadEmployees() {
     getUsuarios();
@@ -33,6 +35,8 @@ export default function Clientes() {
 
   function addUser() {
     console.log("add user clicked!");
+    let path = `/agregarcliente`;
+    navigate(path);
   }
 
   useEffect(() => {

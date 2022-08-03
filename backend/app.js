@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 
-//variables del sistema:
+//VARIABLES DEL SISTEMA
 let connection; //objecto que representa la conexion a Oracle
 conexionExitosa = false; //variable para llevar el estado de la conexion
 const app = express(); //objeto que representa al servidor que escucha en puerto 5000
@@ -11,6 +11,8 @@ const port = 5000; //puerto donde se hace la conexion
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+
+//FUNCIONES START HERE!!!!
 
 //Funcion principal para conectar a la DB Oracle:
 async function connectDB() {
@@ -81,6 +83,29 @@ async function getDBLastUsuario() {
   }
 }
 
+//funcion para verificar cual es el usuario actual en la DB:
+async function addUsuario() {
+  try {
+    let plSQL = `
+                  DECLARE
+                  result VARCHAR2(100);
+                  BEGIN 
+                    :result := ULTIMOUSUARIO(); 
+                  END; 
+                `;
+    const ultimoEmpleado = await connection.execute(plSQL, {
+      result: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
+    });
+    console.log("Ultimo usuario en DB: " + ultimoEmpleado.outBinds.result);
+    return ultimoEmpleado.outBinds.result;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+//RUTAS START HERE!!!!!!
+
 //ruta principal
 app.get("/", (req, res) => {
   res.json({
@@ -111,6 +136,15 @@ app.get("/ultimoUsuario", async (req, res) => {
   console.log("ultimo usuario: " + ultimo);
   res.json({
     result: ultimo,
+  });
+});
+
+//ruta para agregar usuario:
+app.get("/agregarusuario", async (req, res) => {
+  const resultado = await addUsuario(); //se llama la funcion getDBLastUsuario
+  console.log("Resultado de usuario agregado: " + resultado);
+  res.json({
+    result: resultado,
   });
 });
 

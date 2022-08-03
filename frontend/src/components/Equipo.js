@@ -24,7 +24,7 @@ export default function Equipo() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        El equipo:
+        El Equipo:
       </Typography>
       <Grid
         container
