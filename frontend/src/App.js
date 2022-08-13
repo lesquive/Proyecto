@@ -7,8 +7,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Equipo from "./components/Equipo";
 import Employees from "./components/Employees";
-import Clientes from "./components/Clientes";
-import AgregarCliente from "./components/AgregarCliente";
+import Usuarios from "./components/Usuarios";
+import AgregarUsuario from "./components/AgregarUsuario";
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
             <Route path="/" element={<Body />} />
             <Route path="equipo" element={<Equipo />} />
             <Route path="empleados" element={<Employees />} />
-            <Route path="clientes" element={<Clientes />} />
-            <Route path="agregarcliente" element={<AgregarCliente />} />
+            <Route path="usuarios" element={<Usuarios />} />
+            <Route path="agregarusuario" element={<AgregarUsuario />} />
           </Routes>
           <Footer />
         </DBProvider>

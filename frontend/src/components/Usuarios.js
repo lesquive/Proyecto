@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 
-export default function Clientes() {
+export default function Usuarios() {
   const {
     getUsuarios,
     dbUsuarios,
@@ -35,7 +35,7 @@ export default function Clientes() {
 
   function addUser() {
     console.log("add user clicked!");
-    let path = `/agregarcliente`;
+    let path = `/agregarusuario`;
     navigate(path);
   }
 
@@ -59,7 +59,7 @@ export default function Clientes() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        Clientes:
+        Usuarios:
       </Typography>
       <Grid
         container
@@ -68,29 +68,29 @@ export default function Clientes() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Typography
             variant="body1"
             component="div"
             gutterBottom
             sx={{ color: "green" }}
           >
-            Total de Clientes: {todosUsuarios}
+            Total de Usuarios: {todosUsuarios}
           </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Typography
             variant="body1"
             component="div"
             gutterBottom
             sx={{ color: "blue" }}
           >
-            Cliente mas Nuevo: {ultimoUsuario}
+            Usuario mas Nuevo: {ultimoUsuario}
           </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Button variant="contained" color="success" onClick={addUser}>
-            Agregar Cliente
+            Agregar Usuario
           </Button>
         </Grid>
       </Grid>
@@ -99,6 +99,7 @@ export default function Clientes() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table" size="medium">
             <TableHead>
               <TableRow>
+                <TableCell>ID</TableCell>
                 <TableCell>Nombre</TableCell>
                 <TableCell align="right">Segundo Nombre</TableCell>
                 <TableCell align="right">Apellido</TableCell>
@@ -114,6 +115,9 @@ export default function Clientes() {
                   key={row[0]}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
+                  <TableCell component="th" scope="row">
+                    {row[0]}
+                  </TableCell>
                   <TableCell component="th" scope="row">
                     {row[1]}
                   </TableCell>

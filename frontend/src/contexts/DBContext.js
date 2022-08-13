@@ -48,6 +48,24 @@ export function DBProvider({ children }) {
     });
   }
 
+  async function addUsuario(nombre1, nombre2, apellido1, apellido2, cedula) {
+    const data = { nombre1, nombre2, apellido1, apellido2, cedula };
+    fetch("http://localhost:5000/agregarusuario", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     getDBConnection();
@@ -65,6 +83,7 @@ export function DBProvider({ children }) {
     getUsuarios,
     getTodosUsuarios,
     getUltimoUsuario,
+    addUsuario,
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;

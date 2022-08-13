@@ -17,7 +17,7 @@ export default function MenuDropDown() {
   };
 
   const RuteClientes = () => {
-    let path = `/clientes`;
+    let path = `/usuarios`;
     navigate(path);
     handleClose();
   };
@@ -55,7 +55,7 @@ export default function MenuDropDown() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={RuteClientes}>Clientes</MenuItem>
+        <MenuItem onClick={RuteClientes}>Usuarios</MenuItem>
         <MenuItem onClick={RutaEmpleados}>Employees</MenuItem>
         <MenuItem onClick={handleClose}>Inventory</MenuItem>
         <MenuItem onClick={handleClose}>Invoices</MenuItem>

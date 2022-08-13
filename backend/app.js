@@ -29,10 +29,13 @@ async function connectDB() {
   }
 }
 
-//funcion para verificar cual es el usuario actual en la DB:
+//funcion para verificar cuales son los clientes en la DB
 async function getDBUsuarios() {
   try {
-    const usuarios = await connection.execute(`SELECT * From USUARIOS`, []);
+    const usuarios = await connection.execute(
+      `SELECT * From USUARIOS ORDER BY ID_USUARIO DESC`,
+      []
+    );
     console.log("Usuarios en esta funcion: " + usuarios);
     return usuarios.rows;
   } catch (error) {
@@ -84,20 +87,20 @@ async function getDBLastUsuario() {
 }
 
 //funcion para verificar cual es el usuario actual en la DB:
-async function addUsuario() {
+async function addUsuario(name1, name2, lastname1, lastname2, cedu) {
   try {
-    let plSQL = `
-                  DECLARE
-                  result VARCHAR2(100);
-                  BEGIN 
-                    :result := ULTIMOUSUARIO(); 
-                  END; 
-                `;
-    const ultimoEmpleado = await connection.execute(plSQL, {
-      result: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
-    });
-    console.log("Ultimo usuario en DB: " + ultimoEmpleado.outBinds.result);
-    return ultimoEmpleado.outBinds.result;
+    const result = await connection.execute(
+      `BEGIN PKG_CREATE_USER.USER_DATA(:NOMBRE1, :NOMBRE2, :APELLIDO1, :APELLIDO2, :CEDULA); END;`,
+      {
+        NOMBRE1: name1,
+        NOMBRE2: name2,
+        APELLIDO1: lastname1,
+        APELLIDO2: lastname2,
+        CEDULA: cedu,
+      },
+      { autoCommit: true }
+    );
+    console.log("INSERT exitoso");
   } catch (error) {
     console.error(error);
     return error;
@@ -140,12 +143,20 @@ app.get("/ultimoUsuario", async (req, res) => {
 });
 
 //ruta para agregar usuario:
-app.get("/agregarusuario", async (req, res) => {
-  const resultado = await addUsuario(); //se llama la funcion getDBLastUsuario
-  console.log("Resultado de usuario agregado: " + resultado);
-  res.json({
-    result: resultado,
-  });
+app.post("/agregarusuario", async (req, res) => {
+  let nombre1 = req.body.nombre1;
+  let nombre2 = req.body.nombre2;
+  let apellido1 = req.body.apellido1;
+  let apellido2 = req.body.apellido2;
+  let cedula = req.body.cedula;
+  const ultimo = await addUsuario(
+    nombre1,
+    nombre2,
+    apellido1,
+    apellido2,
+    cedula
+  ); //se llama la funcion addUsuario
+  console.log("Success");
 });
 
 // Establecer conexion a DB cuando se ejecuta el servidor:
