@@ -66,6 +66,51 @@ export function DBProvider({ children }) {
       });
   }
 
+  async function deleteUsuario(id) {
+    const data = { id };
+    // console.log(dbUsuarios.filter(({ 0: n }) => n === id));
+    fetch("http://localhost:5000/borrarusuario", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  async function UpdateUsuario(
+    id,
+    nombre1,
+    nombre2,
+    apellido1,
+    apellido2,
+    cedula
+  ) {
+    const data = { id, nombre1, nombre2, apellido1, apellido2, cedula };
+    // console.log(dbUsuarios.filter(({ 0: n }) => n === id));
+    fetch("http://localhost:5000/actualizarusuario", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     getDBConnection();
@@ -84,6 +129,8 @@ export function DBProvider({ children }) {
     getTodosUsuarios,
     getUltimoUsuario,
     addUsuario,
+    deleteUsuario,
+    UpdateUsuario,
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;

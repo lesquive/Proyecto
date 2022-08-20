@@ -107,6 +107,50 @@ async function addUsuario(name1, name2, lastname1, lastname2, cedu) {
   }
 }
 
+async function deleteUsuario(id) {
+  try {
+    const usuarios = await connection.execute(
+      `BEGIN ELIMINAR(:ID_USUARIO);END;`,
+      { ID_USUARIO: id },
+      { autoCommit: true }
+    );
+    console.log("Usuario Eliminado");
+    return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+async function updateUsuario(
+  id,
+  nombre1,
+  nombre2,
+  apellido1,
+  apellido2,
+  cedula
+) {
+  try {
+    const usuarios = await connection.execute(
+      `BEGIN ACTUALIZAR(:ID_USUARIO,:NOMBRE1, :NOMBRE2, :APELLIDO1, :APELLIDO2, :CEDULAU);END;`,
+      {
+        ID_USUARIO: id,
+        NOMBRE1: nombre1,
+        NOMBRE2: nombre2,
+        APELLIDO1: apellido1,
+        APELLIDO2: apellido2,
+        CEDULAU: cedula,
+      },
+      { autoCommit: true }
+    );
+    console.log("Usuario ACTUALIZADO");
+    return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 //RUTAS START HERE!!!!!!
 
 //ruta principal
@@ -157,6 +201,31 @@ app.post("/agregarusuario", async (req, res) => {
     cedula
   ); //se llama la funcion addUsuario
   console.log("Success");
+});
+
+app.post("/borrarusuario", async (req, res) => {
+  let ID_USUARIO = req.body.id;
+  const ultimo = await deleteUsuario(ID_USUARIO); //se llama la funcion addUsuario
+  console.log("Success");
+});
+
+app.post("/actualizarusuario", async (req, res) => {
+  console.log(req.body);
+  let ID_USUARIO = req.body.id;
+  let nombre1 = req.body.nombre1;
+  let nombre2 = req.body.nombre2;
+  let apellido1 = req.body.apellido1;
+  let apellido2 = req.body.apellido2;
+  let cedula = req.body.cedula;
+  const ultimo = await updateUsuario(
+    ID_USUARIO,
+    nombre1,
+    nombre2,
+    apellido1,
+    apellido2,
+    cedula
+  ); //se llama la funcion updateUsuario
+  console.log("USUARIO ACTUALIZADO");
 });
 
 // Establecer conexion a DB cuando se ejecuta el servidor:

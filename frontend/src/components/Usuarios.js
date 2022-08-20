@@ -10,11 +10,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import EditarUsuario from "./EditarUsuario";
+import BorrarUsuario from "./BorrarUsuario";
 
 export default function Usuarios() {
   const {
@@ -125,8 +125,21 @@ export default function Usuarios() {
                   <TableCell align="right">{row[3]}</TableCell>
                   <TableCell align="right">{row[4]}</TableCell>
                   <TableCell align="right">{row[5]}</TableCell>
-                  <TableCell align="right">{<EditIcon />}</TableCell>
-                  <TableCell align="right">{<DeleteIcon />}</TableCell>
+                  <TableCell align="right">
+                    {
+                      <EditarUsuario
+                        id={row[0]}
+                        nombre={row[1]}
+                        segundoNombre={row[2]}
+                        apellido={row[3]}
+                        segundoApellido={row[4]}
+                        cedula={row[5]}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell align="right">
+                    {<BorrarUsuario id={row[0]} />}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

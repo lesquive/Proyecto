@@ -67,32 +67,6 @@ export default function Equipo() {
                 color="text.secondary"
                 gutterBottom
               >
-                Desarolladora Oracle
-              </Typography>
-              <Avatar
-                alt="Paula Luna"
-                src={developer4}
-                sx={{ width: 56, height: 56, m: "auto" }}
-              />
-
-              <Typography variant="body2">
-                <br />
-                Paula Luna.
-                <br />
-                Estudiante de la fidelitas.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item>
-          {" "}
-          <Card sx={{ minWidth: 275, minHeight: 300 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
                 Desarollador Oracle
               </Typography>
               <Avatar
@@ -104,32 +78,6 @@ export default function Equipo() {
               <Typography variant="body2">
                 <br />
                 Camilo Duarte.
-                <br />
-                Estudiante de la fidelitas.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item>
-          {" "}
-          <Card sx={{ minWidth: 275, minHeight: 300 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Desarollador Oracle
-              </Typography>
-              <Avatar
-                alt="Johan Solis"
-                src={developer3}
-                sx={{ width: 56, height: 56, m: "auto" }}
-              />
-
-              <Typography variant="body2">
-                <br />
-                Johan Solis.
                 <br />
                 Estudiante de la fidelitas.
               </Typography>

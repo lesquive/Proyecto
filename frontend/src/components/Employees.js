@@ -64,7 +64,7 @@ export default function Employees() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Typography
             variant="body1"
             component="div"
@@ -74,7 +74,7 @@ export default function Employees() {
             Total de Empleados: {todosUsuarios}
           </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Typography
             variant="body1"
             component="div"
@@ -84,7 +84,7 @@ export default function Employees() {
             Empleado mas Nuevo: {ultimoUsuario}
           </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={4}>
           <Button variant="contained" color="success" onClick={addUser}>
             Agregar Empleado
           </Button>

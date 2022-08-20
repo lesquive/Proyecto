@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function AgregarUsuario() {
   const { addUsuario } = useDB();
@@ -14,12 +15,14 @@ export default function AgregarUsuario() {
   const [apellido1, setApellido] = useState("");
   const [apellido2, setApellido2] = useState("");
   const [cedula, setCedula] = useState("");
+  let navigate = useNavigate();
 
   const handleCreateNewItem = (e) => {
     console.log("Made it here!");
     e.preventDefault();
     console.log(nombre1, nombre2, apellido1, apellido2, cedula);
     addUsuario(nombre1, nombre2, apellido1, apellido2, cedula);
+    navigate("/usuarios", { replace: true });
   };
 
   useEffect(() => {
