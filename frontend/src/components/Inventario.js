@@ -11,16 +11,16 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export default function Proveedores() {
-  const { dbProveedores, getDbProveedores } = useDB();
+export default function Inventario() {
+  const { dbInventario, getDbInventario } = useDB();
 
-  async function loadProveedores() {
-    getDbProveedores();
+  async function loadInventario() {
+    getDbInventario();
   }
 
   useEffect(() => {
     let abortController = new AbortController();
-    loadProveedores();
+    loadInventario();
     return () => {
       abortController.abort();
     };
@@ -38,24 +38,22 @@ export default function Proveedores() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        Proveedores
+        Inventario
       </Typography>
-      {dbProveedores && (
+      {dbInventario && (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table" size="medium">
             <TableHead>
               <TableRow>
-                <TableCell>Proveedor</TableCell>
-                <TableCell align="right">Email</TableCell>
-                <TableCell align="right">Fecha Inicio</TableCell>
-                <TableCell align="right">Horario</TableCell>
-                <TableCell align="right">Telefono</TableCell>
+                <TableCell>Descripcion</TableCell>
+                <TableCell align="right">Precio</TableCell>
+                <TableCell align="right">Cantidad</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {dbProveedores.map((row) => (
+              {dbInventario.map((row) => (
                 <TableRow
-                  key={row[4]}
+                  key={row[0]}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -63,8 +61,6 @@ export default function Proveedores() {
                   </TableCell>
                   <TableCell align="right">{row[1]}</TableCell>
                   <TableCell align="right">{row[2]}</TableCell>
-                  <TableCell align="right">{row[3]}</TableCell>
-                  <TableCell align="right">{row[4]}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

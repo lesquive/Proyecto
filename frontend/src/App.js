@@ -10,6 +10,8 @@ import Employees from "./components/Employees";
 import Usuarios from "./components/Usuarios";
 import AgregarUsuario from "./components/AgregarUsuario";
 import Proveedores from "./components/Proveedores";
+import Inventario from "./components/Inventario";
+import Facturar from "./components/Facturar";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="usuarios" element={<Usuarios />} />
             <Route path="agregarusuario" element={<AgregarUsuario />} />
             <Route path="proveedores" element={<Proveedores />} />
+            <Route path="inventario" element={<Inventario />} />
+            <Route path="facturar" element={<Facturar />} />
           </Routes>
           <Footer />
         </DBProvider>

@@ -59,7 +59,7 @@ export default function Usuarios() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        Usuarios:
+        Usuarios
       </Typography>
       <Grid
         container

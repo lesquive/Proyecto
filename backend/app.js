@@ -172,6 +172,48 @@ async function getDBEmpleados() {
   }
 }
 
+//funcion para verificar cuales son los proveedores en la DB
+async function getDBProveedores() {
+  try {
+    const result = await connection.execute(
+      `BEGIN
+        GETPROVEEDORES(:cursor);
+       END;`,
+      {
+        cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
+      }
+    );
+    const resultSet1 = result.outBinds.cursor;
+    const rows1 = await resultSet1.getRows(); // no parameter means get all rows
+    return rows1;
+    // return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+//funcion para verificar cuales son los inventario en la DB
+async function getDBInventario() {
+  try {
+    const result = await connection.execute(
+      `BEGIN
+        GETINVENTARIO(:cursor);
+       END;`,
+      {
+        cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
+      }
+    );
+    const resultSet1 = result.outBinds.cursor;
+    const rows1 = await resultSet1.getRows(); // no parameter means get all rows
+    return rows1;
+    // return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 //RUTAS START HERE!!!!!!
 
 //ruta principal
@@ -253,6 +295,20 @@ app.get("/listarEmpleados", async (req, res) => {
   const empleados = await getDBEmpleados(); //se llama la funcion getDBUsuarios
   res.json({
     result: empleados,
+  });
+});
+
+app.get("/listarProveedores", async (req, res) => {
+  const proveedores = await getDBProveedores(); //se llama la funcion getDBUsuarios
+  res.json({
+    result: proveedores,
+  });
+});
+
+app.get("/listarInventario", async (req, res) => {
+  const inventario = await getDBInventario(); //se llama la funcion getDBUsuarios
+  res.json({
+    result: inventario,
   });
 });
 

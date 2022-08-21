@@ -28,6 +28,18 @@ export default function MenuDropDown() {
     handleClose();
   };
 
+  const RutaInventario = () => {
+    let path = `/inventario`;
+    navigate(path);
+    handleClose();
+  };
+
+  const RutaFacturar = () => {
+    let path = `/facturar`;
+    navigate(path);
+    handleClose();
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -63,8 +75,8 @@ export default function MenuDropDown() {
       >
         <MenuItem onClick={RuteClientes}>Usuarios</MenuItem>
         <MenuItem onClick={RutaEmpleados}>Empleados</MenuItem>
-        <MenuItem onClick={handleClose}>Inventario</MenuItem>
-        <MenuItem onClick={handleClose}>Facturas</MenuItem>
+        <MenuItem onClick={RutaInventario}>Inventario</MenuItem>
+        <MenuItem onClick={RutaFacturar}>Facturar</MenuItem>
         <MenuItem onClick={RutaProveedores}>Proveedores</MenuItem>
       </Menu>
     </div>
