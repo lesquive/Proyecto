@@ -10,21 +10,17 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 
-export default function Employees() {
-  const { dbEmpleados, getEmpleados } = useDB();
+export default function Proveedores() {
+  const { dbProveedores, getDbProveedores } = useDB();
 
-  async function loadEmployees() {
-    getEmpleados();
+  async function loadProveedores() {
+    getDbProveedores();
   }
 
   useEffect(() => {
     let abortController = new AbortController();
-    loadEmployees();
+    loadProveedores();
     return () => {
       abortController.abort();
     };
@@ -42,22 +38,22 @@ export default function Employees() {
     >
       <Typography variant="h1" component="div" gutterBottom mb={8}>
         {" "}
-        Empleados:
+        Proveedores
       </Typography>
-      {dbEmpleados && (
+      {dbProveedores && (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table" size="medium">
             <TableHead>
               <TableRow>
-                <TableCell>Nombre</TableCell>
-                <TableCell align="right">Segundo Nombre</TableCell>
-                <TableCell align="right">Salario</TableCell>
-                <TableCell align="right">Turno</TableCell>
+                <TableCell>Proveedor</TableCell>
+                <TableCell align="right">Email</TableCell>
+                <TableCell align="right">Fecha Inicio</TableCell>
+                <TableCell align="right">Horario</TableCell>
                 <TableCell align="right">Telefono</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {dbEmpleados.map((row) => (
+              {dbProveedores.map((row) => (
                 <TableRow
                   key={row[4]}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -67,8 +63,6 @@ export default function Employees() {
                   </TableCell>
                   <TableCell align="right">{row[1]}</TableCell>
                   <TableCell align="right">{row[2]}</TableCell>
-                  <TableCell align="right">{row[3]}</TableCell>
-                  <TableCell align="right">{row[4]}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

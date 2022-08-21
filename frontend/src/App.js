@@ -9,6 +9,7 @@ import Equipo from "./components/Equipo";
 import Employees from "./components/Employees";
 import Usuarios from "./components/Usuarios";
 import AgregarUsuario from "./components/AgregarUsuario";
+import Proveedores from "./components/Proveedores";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="empleados" element={<Employees />} />
             <Route path="usuarios" element={<Usuarios />} />
             <Route path="agregarusuario" element={<AgregarUsuario />} />
+            <Route path="proveedores" element={<Proveedores />} />
           </Routes>
           <Footer />
         </DBProvider>

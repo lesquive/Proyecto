@@ -18,7 +18,7 @@ app.use(cors());
 async function connectDB() {
   try {
     connection = await oracledb.getConnection({
-      user: "ESTUDIANTE",
+      user: "PRIVE",
       password: "12345",
       connectionString: "localhost:1521/ORCL",
     });
@@ -151,6 +151,27 @@ async function updateUsuario(
   }
 }
 
+//funcion para verificar cuales son los empleados en la DB
+async function getDBEmpleados() {
+  try {
+    const result = await connection.execute(
+      `BEGIN
+        GETEMPLEADOS(:cursor);
+       END;`,
+      {
+        cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
+      }
+    );
+    const resultSet1 = result.outBinds.cursor;
+    const rows1 = await resultSet1.getRows(); // no parameter means get all rows
+    return rows1;
+    // return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 //RUTAS START HERE!!!!!!
 
 //ruta principal
@@ -226,6 +247,13 @@ app.post("/actualizarusuario", async (req, res) => {
     cedula
   ); //se llama la funcion updateUsuario
   console.log("USUARIO ACTUALIZADO");
+});
+
+app.get("/listarEmpleados", async (req, res) => {
+  const empleados = await getDBEmpleados(); //se llama la funcion getDBUsuarios
+  res.json({
+    result: empleados,
+  });
 });
 
 // Establecer conexion a DB cuando se ejecuta el servidor:

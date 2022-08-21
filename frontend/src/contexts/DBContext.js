@@ -11,6 +11,8 @@ export function DBProvider({ children }) {
   const [dbUsuarios, setDbUsuarios] = useState([]);
   const [todosUsuarios, setTodosUsuarios] = useState(0);
   const [ultimoUsuario, setUltimoUsuario] = useState("");
+  const [dbEmpleados, setDbEmpleados] = useState([]);
+  const [dbProveedores, setDbProveedores] = useState([]);
 
   async function getDBConnection() {
     fetch("http://localhost:5000/").then((res) => {
@@ -111,6 +113,24 @@ export function DBProvider({ children }) {
       });
   }
 
+  async function getEmpleados() {
+    fetch("http://localhost:5000/listarEmpleados").then((res) => {
+      res.json().then((data) => {
+        console.log(data.result);
+        setDbEmpleados(data.result);
+      });
+    });
+  }
+
+  async function getDbProveedores() {
+    fetch("http://localhost:5000/listarProveedores").then((res) => {
+      res.json().then((data) => {
+        console.log(data.result);
+        setDbProveedores(data.result);
+      });
+    });
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     getDBConnection();
@@ -124,6 +144,8 @@ export function DBProvider({ children }) {
     dbUsuarios,
     todosUsuarios,
     ultimoUsuario,
+    dbEmpleados,
+    dbProveedores,
     getDBConnection,
     getUsuarios,
     getTodosUsuarios,
@@ -131,6 +153,8 @@ export function DBProvider({ children }) {
     addUsuario,
     deleteUsuario,
     UpdateUsuario,
+    getEmpleados,
+    getDbProveedores,
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;
