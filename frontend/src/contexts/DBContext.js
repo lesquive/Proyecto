@@ -14,6 +14,7 @@ export function DBProvider({ children }) {
   const [dbEmpleados, setDbEmpleados] = useState([]);
   const [dbProveedores, setDbProveedores] = useState([]);
   const [dbInventario, setDbInventario] = useState([]);
+  const [dbOrden, setDbOrden] = useState([]);
 
   async function getDBConnection() {
     fetch("http://localhost:5000/").then((res) => {
@@ -140,6 +141,14 @@ export function DBProvider({ children }) {
       });
     });
   }
+  async function getDbOrden() {
+    fetch("http://localhost:5000/listarOrden").then((res) => {
+      res.json().then((data) => {
+        console.log(data.result);
+        setDbOrden(data.result);
+      });
+    });
+  }
 
   useEffect(() => {
     let abortController = new AbortController();
@@ -157,6 +166,7 @@ export function DBProvider({ children }) {
     dbEmpleados,
     dbProveedores,
     dbInventario,
+    dbOrden,
     getDBConnection,
     getUsuarios,
     getTodosUsuarios,
@@ -167,6 +177,7 @@ export function DBProvider({ children }) {
     getEmpleados,
     getDbProveedores,
     getDbInventario,
+    getDbOrden,
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;

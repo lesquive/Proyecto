@@ -214,6 +214,27 @@ async function getDBInventario() {
   }
 }
 
+//funcion para verificar cuales son las ordenes en la DB
+async function getDBOrden() {
+  try {
+    const result = await connection.execute(
+      `BEGIN
+        GETORDEN(:cursor);
+       END;`,
+      {
+        cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
+      }
+    );
+    const resultSet1 = result.outBinds.cursor;
+    const rows1 = await resultSet1.getRows(); // no parameter means get all rows
+    return rows1;
+    // return usuarios.rows;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 //RUTAS START HERE!!!!!!
 
 //ruta principal
@@ -309,6 +330,13 @@ app.get("/listarInventario", async (req, res) => {
   const inventario = await getDBInventario(); //se llama la funcion getDBUsuarios
   res.json({
     result: inventario,
+  });
+});
+
+app.get("/listarOrden", async (req, res) => {
+  const orden = await getDBOrden(); //se llama la funcion getDBUsuarios
+  res.json({
+    result: orden,
   });
 });
 

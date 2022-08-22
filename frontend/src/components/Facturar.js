@@ -30,14 +30,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function Facturar() {
-  const { dbInventario, getDbInventario } = useDB();
+  const { dbOrden, getDbOrden } = useDB();
   const [total, setTotal] = useState(0);
   const [factura, setFactura] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [openFacturaExitosa, setOpenFacturaExitosa] = React.useState(false);
 
   async function loadInventario() {
-    getDbInventario();
+    getDbOrden();
   }
 
   function getFactura() {
@@ -110,7 +110,7 @@ export default function Facturar() {
           </Grid>
         </Grid>
       )}
-      {dbInventario && (
+      {dbOrden && (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table" size="medium">
             <TableHead>
@@ -121,7 +121,7 @@ export default function Facturar() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {dbInventario.map((row) => (
+              {dbOrden.map((row) => (
                 <TableRow
                   key={row[0]}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
