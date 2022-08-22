@@ -54,6 +54,7 @@ export default function Facturar() {
   };
 
   const handleClickFacturaExitosa = () => {
+    setTotal(0);
     handleClose();
     setOpenFacturaExitosa(true);
   };
@@ -123,7 +124,7 @@ export default function Facturar() {
             <TableBody>
               {dbOrden.map((row) => (
                 <TableRow
-                  key={row[0]}
+                  key={row[0] + Math.floor(Math.random() * 100)}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -170,7 +171,7 @@ export default function Facturar() {
               alignItems="center"
               spacing={1}
               sx={{ mb: 0.5, mt: 0.5 }}
-              key={articulo[0]}
+              key={articulo[0] + Math.floor(Math.random() * 100)}
             >
               <Grid item>{articulo[0]}</Grid>
               <Grid item>{articulo[1]}</Grid>
